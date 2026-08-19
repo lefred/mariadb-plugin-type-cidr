@@ -1,0 +1,26 @@
+name: Build and package TYPE_CIDR plugin
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    uses: lefred/mariadb-plugin-ci/.github/workflows/build-plugin.yml@v1
+    with:
+      plugin_name: type-cidr
+      plugin_directory: type_cidr
+      build_target: type_cidr
+      plugin_library: type_cidr.so
+      cmake_options: -DPLUGIN_DATE_EXTRA=DYNAMIC
+      test_suite: type_cidr
+      run_tests: ${{ startsWith(github.ref, 'refs/tags/v') }}
