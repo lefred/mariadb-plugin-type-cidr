@@ -15,18 +15,17 @@ permissions:
 
 jobs:
   build:
-    uses: lefred/mariadb-plugin-ci/.github/workflows/build-plugin.yml@main
+    uses: lefred/mariadb-plugin-ci/.github/workflows/build-plugin.yml@v1
     with:
       plugin_name: type-cidr
       plugin_directory: type_cidr
       build_target: type_cidr
       plugin_library: type_cidr.so
 
-      sdk_image: quay.io/lefred14/mariadb-plugin-build
       mariadb_versions: |
           13.0.2
           13.1.1
           
-      cmake_options: -DPLUGIN_DATE_EXTRA=DYNAMIC
+      cmake_options: -DPLUGIN_TYPE_CIDR=DYNAMIC
       test_suite: type_cidr
       run_tests: false
